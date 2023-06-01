@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cookie Clicker</title>
+  <style>
+    body {
+      text-align: center;
+    }
+    #corn {
+      width: 200px;
+      height: 200px;
+      background-image: url('cookie.png');
+      background-size: cover;
+      margin: 50px auto;
+      cursor: pointer;
+    }
+    #score {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+  </style>
+</head>
+<body>
+  <h1>Fruit Clicker</h1>
+  <div id="corn"></div>
+  <p id="score">Score: 0</p>
+  <table>
+    <tr>
+        <td><img src="images/apple.png" id="applePic" width = 100 height = 100></img></td>
+        <td><button id="appleBtn">Upgrade (5)</button></td>
+    </tr>
+    <tr>
+        <td><img src="images/orange.png" id="orangePic" width = 100 height = 100></img></td>
+        <td><button id="orangeBtn">Upgrade (50)</button></td>
+    </tr>
+    <tr>
+        <td><img src="images/grape.png" id="grapePic" width = 100 height = 100></img></td>
+        <td><button id="grapeBtn">Upgrade (100)</button></td>
+    </tr>
+  </table>
+  
+
+  <script>
+    // Cookie variables
+    let score = 0;
+    let scorePerClick = 1;
+    var upgrades = {
+        "apple":5,
+        "orange":50,
+        "grape":100
+
+
+    }
+    // DOM elements
+    const corn = document.getElementById('corn');
+    const scoreElement = document.getElementById('score');
+
+    // Event listeners
+    corn.addEventListener('click', incrementScore);
+    upgradeButton.addEventListener('click', upgrade);
+
+    // Function to increment the score
+    function incrementScore() {
+      score += scorePerClick;
+      scoreElement.textContent = `Score: ${score}`;
+    }
+
+    // Function to upgrade the score per click
+    
+    function appleUpgrade(){
+        if (score >= upgradeCost) {
+            score -= upgradeCost;
+            scorePerClick += 5;
+            upgradeCost += 10;
+            scoreElement.textContent = `Score: ${score}`;
+            upgradeButton.textContent = `Upgrade (${upgradeCost} Score)`;
+        }
+    }
+  </script>
+</body>
+</html>
