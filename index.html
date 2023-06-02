@@ -1,81 +1,514 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Cookie Clicker</title>
+  <title>Fruit Clicker</title>
   <style>
     body {
       text-align: center;
+      background-image: url("images/background.jpg");
     }
     #corn {
       width: 200px;
       height: 200px;
-      background-image: url('cookie.png');
+      background-image: url("images/fruitVendor.jpg");
       background-size: cover;
       margin: 50px auto;
       cursor: pointer;
     }
-    #score {
+    #coins {
       font-size: 24px;
       font-weight: bold;
       margin-bottom: 20px;
     }
+    particle {
+      position: fixed;
+      left: 0;
+      top: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+    }
+    
     
   </style>
 </head>
 <body>
   <h1>Fruit Clicker</h1>
-  <div id="corn"></div>
-  <p id="score">Score: 0</p>
-  <table>
-    <tr>
-        <td><img src="images/apple.png" id="applePic" width = 100 height = 100></img></td>
-        <td><button id="appleBtn">Upgrade (5)</button></td>
-    </tr>
-    <tr>
-        <td><img src="images/orange.png" id="orangePic" width = 100 height = 100></img></td>
-        <td><button id="orangeBtn">Upgrade (50)</button></td>
-    </tr>
-    <tr>
-        <td><img src="images/grape.png" id="grapePic" width = 100 height = 100></img></td>
-        <td><button id="grapeBtn">Upgrade (100)</button></td>
-    </tr>
-  </table>
+  <div style="text-align:center">
+  <div style = "float: left">
+    <center><img src = "images/fruitVendor.jpg" id="clicker" height=100 width=100></img></center>
+    <center><p id="coins" >Coins: 0</p></center>
+    <center><table id="main" ></center>
+      <tr>
+          <td><img src="images/apple.png" id="applePic" width = 100 height = 100></img></td>
+          <td><button id="appleBtn">Upgrade (5 Coins)</button></td>
+      </tr>
+      <tr>
+          <td><img src="images/orange.png" id="orangePic" width = 100 height = 100></img></td>
+          <td><button id="orangeBtn">Upgrade (50 Coins)</button></td>
+      </tr>
+      <tr>
+          <td><img src="images/grape.png" id="grapePic" width = 100 height = 100></img></td>
+          <td><button id="grapeBtn">Upgrade (100 Coins)</button></td>
+      </tr>
+      <tr style="display:none;" id="kiwiRow">
+        <td><img src="images/kiwi.png" id="grapePic" width = 100 height = 100></img></td>
+        <td><button id="kiwiBtn">Upgrade (1000 Coins)</button></td>
+      </tr>
+      <tr style="display:none;" id="lemonRow">
+        <td><img src="images/lemon.png" id="grapePic" width = 100 height = 100></img></td>
+        <td><button id="lemonBtn">Upgrade (5000 Coins)</button></td>
+      </tr>
+    </table>
+  </div>
+  
+  <div style="float:right;display:none" id = goldDiv>
+    <center><img src = "images/fruitVendor.jpg" id="goldClicker" height=100 width=100></img></center>
+    <center><p id="goldCoins" >Gold Coins: 0</p></center>
+    <center><table id="goldTable" ></center>
+      <tr>
+          <td><img src="images/banana.png" id="bananaPic" width = 100 height = 100></img></td>
+          <td><button id="bananaBtn">Upgrade (5 Coins)</button></td>
+      </tr>
+      <tr>
+          <td><img src="images/pineapple.png" id="pineapplePic" width = 100 height = 100></img></td>
+          <td><button id="pineappleBtn">Upgrade (50 Coins)</button></td>
+      </tr>
+      <tr>
+          <td><img src="images/coconut.png" id="coconutPic" width = 100 height = 100></img></td>
+          <td><button id="coconutBtn">Upgrade (100 Coins)</button></td>
+      </tr>
+    </table>
+  </div>
+  <div style="margin:auto;display:none" id = "silverDiv">
+    <center><img src = "images/fruitVendor.jpg" id="silverClicker" height=100 width=100></img></center>
+    <center><p id="silverCoins" >Silver Coins: 0</p></center>
+    <center><table id="silverTable" ></center>
+      <tr>
+          <td><img src="images/lime.png" id="limePic" width = 100 height = 100></img></td>
+          <td><button id="limeBtn">Upgrade (5 Coins)</button></td>
+      </tr>
+      <tr>
+          <td><img src="images/mango.png" id="mangoPic" width = 100 height = 100></img></td>
+          <td><button id="mangoBtn">Upgrade (50 Coins)</button></td>
+      </tr>
+      <tr>
+          <td><img src="images/watermelon.png" id="watermelonPic" width = 100 height = 100></img></td>
+          <td><button id="watermelonBtn">Upgrade (100 Coins)</button></td>
+      </tr>
+    </table>
+  </div>
+  </div>
   
 
   <script>
     // Cookie variables
-    let score = 0;
-    let scorePerClick = 1;
+    if (document.body.animate) {
+  document.getElementById("clicker").addEventListener('click', pop);
+  document.getElementById("silverClicker").addEventListener('click', popSilver);
+  document.getElementById("goldClicker").addEventListener('click', popGold);
+}
+
+function pop (e) {
+  // Quick check if user clicked the button using a keyboard
+  if (e.clientX === 0 && e.clientY === 0) {
+    const bbox = document.getElementById("clicker").getBoundingClientRect();
+    const x = bbox.left + bbox.width / 2;
+    const y = bbox.top + bbox.height / 2;
+    for (let i = 0; i < 10; i++) {
+      // We call the function createParticle 30 times
+      // We pass the coordinates of the button for x & y values
+      //alert(x+" "+y)
+      createParticle(x, y,"");
+    }
+  } else {
+      for (let i = 0; i < 10; i++) {
+      // We call the function createParticle 30 times
+      // As we need the coordinates of the mouse, we pass them as arguments
+        //alert(e.clientx+" "+e.clienty)
+        //alert(e.clientx+" "+e.clienty)
+        
+        createParticle(e.clientX, e.clientY,"");
+      }
+    }
+  }
+  function popSilver (e) {
+  // Quick check if user clicked the button using a keyboard
+  if (e.clientX === 0 && e.clientY === 0) {
+    const bbox = document.getElementById("silverClicker").getBoundingClientRect();
+    const x = bbox.left + bbox.width / 2;
+    const y = bbox.top + bbox.height / 2;
+    for (let i = 0; i < 10; i++) {
+      // We call the function createParticle 30 times
+      // We pass the coordinates of the button for x & y values
+      //alert(x+" "+y)
+      createParticle(x, y,"silver");
+    }
+  } else {
+      for (let i = 0; i < 10; i++) {
+      // We call the function createParticle 30 times
+      // As we need the coordinates of the mouse, we pass them as arguments
+        //alert(e.clientx+" "+e.clienty)
+        //alert(e.clientx+" "+e.clienty)
+        
+        createParticle(e.clientX, e.clientY,"silver");
+      }
+    }
+  }
+  function popGold (e) {
+  // Quick check if user clicked the button using a keyboard
+  if (e.clientX === 0 && e.clientY === 0) {
+    const bbox = document.getElementById("goldClicker").getBoundingClientRect();
+    const x = bbox.left + bbox.width / 2;
+    const y = bbox.top + bbox.height / 2;
+    for (let i = 0; i < 10; i++) {
+      // We call the function createParticle 30 times
+      // We pass the coordinates of the button for x & y values
+      //alert(x+" "+y)
+      createParticle(x, y,"gold");
+    }
+  } else {
+      for (let i = 0; i < 10; i++) {
+      // We call the function createParticle 30 times
+      // As we need the coordinates of the mouse, we pass them as arguments
+        //alert(e.clientx+" "+e.clienty)
+        //alert(e.clientx+" "+e.clienty)
+        
+        createParticle(e.clientX, e.clientY,"gold");
+      }
+    }
+  }
+
+  function createParticle (sx, sy,whichButton) {
+    
+    const particle = document.createElement('particle');
+    //particle.src = "images/dollar.png"
+    document.body.appendChild(particle);
+    
+    // Calculate a random size from 5px to 25px
+    const size = Math.floor(Math.random() * 20 + 5);
+    //particle.style.width = "10px";
+    //particle.style.height = "10px";
+    particle.style.width = `30px`;
+    particle.style.height = `30px`;
+    particle.style.backgroundImage = "url('images/dollar.png')";
+    particle.style.backgroundSize = "30px"
+    //particle.style.background = `hsl(${Math.random() * 90 + 180}, 70%, 60%)`;
+    // Generate a random color in a blue/purple palette
+    // Generate a random color in a blue/purple palette
+    var bbox;
+    if(whichButton === "silver"){
+      bbox = document.getElementById("silverClicker").getBoundingClientRect();
+    }else if(whichButton === "gold"){
+      bbox = document.getElementById("goldClicker").getBoundingClientRect();
+    }else{
+      //alert('pass')
+      bbox = document.getElementById("clicker").getBoundingClientRect();
+    }
+    const x = bbox.left + bbox.width / 2;
+    const y = bbox.top + bbox.height / 2;
+    // Generate a random x & y destination within a distance of 75px from the mouse
+    const destinationX = x + (Math.random() - 0.5) * 2 * 75;
+    const destinationY = y + (Math.random() - 0.5) * 2 * 75;
+
+    // Store the animation in a variable as we will need it later
+    const animation = particle.animate([
+      {
+        // Set the origin position of the particle
+        // We offset the particle with half its size to center it around the mouse
+        transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+        opacity: 1
+      },
+      {
+        // We define the final coordinates as the second keyframe
+        transform: `translate(${destinationX}px, ${destinationY}px)`,
+        opacity: 0
+      }
+    ], {
+      // Set a random duration from 500 to 1500ms
+      duration: Math.random() * 1000 + 500,
+      easing: 'cubic-bezier(0, .9, .57, 1)',
+      // Delay every particle with a random value of 200ms
+      delay: Math.random() * 200
+    });
+    
+    // When the animation is complete, remove the element from the DOM
+    animation.onfinish = () => {
+      particle.remove();
+    };
+  }
+    
+    let coins = 40000;
+    let coinsPerClick = 1;
+    let silverCoins = 10000;
+    let silverCoinsPerClick = 1;
+    let goldCoins = 0;
+    let goldCoinsPerClick = 1;
+
     var upgrades = {
         "apple":5,
         "orange":50,
-        "grape":100
+        "grape":100,
+        "kiwi":1000,
+        "lemon":5000,
 
 
+    }
+    var silverUpgrades = {
+      "lime":5,
+      "mango":50,
+      "watermelon":100
+      
+    }
+    var goldUpgrades = {
+      "banana":5,
+      "pineapple":50,
+      "coconut":100
     }
     // DOM elements
-    const corn = document.getElementById('corn');
-    const scoreElement = document.getElementById('score');
+    const clicker = document.getElementById('clicker');
+    const silverClicker = document.getElementById("silverClicker");
+    const goldClicker = document.getElementById("goldClicker");
 
+    const coinsElement = document.getElementById('coins');
+    const silverCoinsElement = document.getElementById("silverCoins");
+    const goldCoinsElement = document.getElementById("goldCoins");
+
+    const appleBtn = document.getElementById("appleBtn");
+    const orangeBtn = document.getElementById("orangeBtn")
+    const grapeBtn = document.getElementById("grapeBtn");
+    const kiwiRow = document.getElementById("kiwiRow");
+    const lemonRow = document.getElementById("lemonRow");
+
+    const limeBtn = document.getElementById("limeBtn");
+    const mangoBtn = document.getElementById("mangoBtn");
+    const watermelonBtn = document.getElementById("watermelonBtn");
+
+    const bananaBtn = document.getElementById("bananaBtn");
+    const pineappleBtn = document.getElementById("pineappleBtn");
+    const coconutBtn = document.getElementById("coconutBtn");
+
+    const goldDiv = document.getElementById("goldDiv");
+    const silverDiv = document.getElementById("silverDiv")
     // Event listeners
-    corn.addEventListener('click', incrementScore);
-    upgradeButton.addEventListener('click', upgrade);
+    clicker.addEventListener('click', incrementcoins);
+    silverClicker.addEventListener("click",silverIncrement);
+    goldClicker.addEventListener("click",goldIncrement);
+    function debounce(func, delay = 3000) {
+      let timerId;
+      return (...args) => {
+          clearTimeout(timerId);
+          timerId = setTimeout(() => {
+              func.apply(this, args);
+          }, delay);
+      };
+    }
+    appleBtn.addEventListener('click', appleUpgrade);
+    orangeBtn.addEventListener("click",orangeUpgrade);
+    grapeBtn.addEventListener("click",grapeUpgrade);
+    kiwiBtn.addEventListener("click",kiwiUpgrade);
+    lemonBtn.addEventListener("click",lemonUpgrade);
 
-    // Function to increment the score
-    function incrementScore() {
-      score += scorePerClick;
-      scoreElement.textContent = `Score: ${score}`;
+    var debouncedLime = debounce(limeUpgrade);
+    var debouncedMango = debounce(mangoUpgrade);
+    var debouncedWatermelon = debounce(watermelonUpgrade);
+
+    limeBtn.addEventListener("click",debouncedLime);
+    mangoBtn.addEventListener("click",debouncedMango);
+    watermelonBtn.addEventListener("click",debouncedWatermelon);
+
+    var debouncedBanana = debounce(bananaUpgrade);
+    var debouncedPineapple = debounce(pineappleUpgrade);
+    var debouncedCoconut = debounce(coconutUpgrade);
+    
+    bananaBtn.addEventListener("click",debouncedBanana);
+    pineappleBtn.addEventListener("click",debouncedPineapple);
+    coconutBtn.addEventListener("click",debouncedCoconut);
+
+    // Function to increment the coins
+    function incrementcoins() {
+      coins += coinsPerClick;
+      coinsElement.textContent = `Coins: ${coins}`;
+    }
+    function silverIncrement(){
+      silverCoins += silverCoinsPerClick;
+      silverCoinsElement.textContent = `Silver Coins: ${silverCoins}`;
+
+    }
+    function goldIncrement(){
+      goldCoins += goldCoinsPerClick;
+      goldCoinsElement.textContent = `Gold Coins: ${goldCoins}`;
+
     }
 
-    // Function to upgrade the score per click
+    // Function to upgrade the coins per click
     
     function appleUpgrade(){
-        if (score >= upgradeCost) {
-            score -= upgradeCost;
-            scorePerClick += 5;
-            upgradeCost += 10;
-            scoreElement.textContent = `Score: ${score}`;
-            upgradeButton.textContent = `Upgrade (${upgradeCost} Score)`;
+        if (coins >= upgrades["apple"]) {
+            coins -= upgrades["apple"];
+            if(coinsPerClick == 1){
+                coinsPerClick = 2;
+            }else{
+                coinsPerClick += 2;
+            }
+            
+            upgrades["apple"] += 20;
+            coinsElement.textContent = `coins: ${coins}`;
+            appleBtn.innerHTML = `Upgrade (${upgrades["apple"]} coins)`;
+        }
+    }
+    function orangeUpgrade(){
+        if (coins >= upgrades["orange"]) {
+            coins -= upgrades["orange"];
+            if(coinsPerClick == 1){
+                coinsPerClick = 10;
+            }else{
+                coinsPerClick += 10;
+            }
+            
+            upgrades["orange"] += 50;
+            coinsElement.textContent = `coins: ${coins}`;
+            orangeBtn.textContent = `Upgrade (${upgrades["orange"]} coins)`;
+        }
+    }
+    function grapeUpgrade(){
+        if (coins >= upgrades["grape"]) {
+            coins -= upgrades["grape"];
+            if(coinsPerClick == 1){
+                coinsPerClick = 20;
+            }else{
+                coinsPerClick += 20;
+            }
+            
+            upgrades["grape"] += 150;
+            if(upgrades["grape"] > 500){
+              kiwiRow.style.display = "table-row";
+              lemonRow.style.display = "table-row";
+              
+            }
+            coinsElement.textContent = `coins: ${coins}`;
+            grapeBtn.textContent = `Upgrade (${upgrades["grape"]} coins)`;
+        }
+    }
+    function limeUpgrade(){
+        if (silverCoins >= silverUpgrades["lime"]) {
+            silverCoins -= silverUpgrades["lime"];
+            if(silverCoinsPerClick == 1){
+                silverCoinsPerClick = 2;
+            }else{
+                silverCoinsPerClick += 2;
+            }
+            
+            silverUpgrades["lime"] += 20;
+            silverCoinsElement.textContent = `Silver Coins: ${silverCoins}`;
+            limeBtn.textContent = `Upgrade (${silverUpgrades["lime"]} Silver Coins)`;
+        }
+    }
+    function mangoUpgrade(){
+        if (silverCoins >= silverUpgrades["mango"]) {
+            silverCoins -= silverUpgrades["mango"];
+            if(silverCoinsPerClick == 1){
+                silverCoinsPerClick = 10;
+            }else{
+                silverCoinsPerClick += 10;
+            }
+            
+            silverUpgrades["mango"] += 50;
+            silverCoinsElement.textContent = `Silver Coins: ${silverCoins}`;
+            mangoBtn.textContent = `Upgrade (${silverUpgrades["mango"]} Silver Coins)`;
+        }
+    }
+    function watermelonUpgrade(){
+        if (silverCoins >= silverUpgrades["watermelon"]) {
+            silverCoins -= silverUpgrades["watermelon"];
+            if(silverCoinsPerClick == 1){
+                silverCoinsPerClick = 20;
+            }else{
+                silverCoinsPerClick += 20;
+            }
+            
+            silverUpgrades["watermelon"] += 150;
+            silverCoinsElement.textContent = `Silver Coins: ${silverCoins}`;
+            watermelonBtn.textContent = `Upgrade (${silverUpgrades["watermelon"]} Silver Coins)`;
+        }
+    }
+    function bananaUpgrade(){
+        if (goldCoins >= goldUpgrades["banana"]) {
+            goldCoins -= goldUpgrades["banana"];
+            if(goldCoinsPerClick == 1){
+                goldCoinsPerClick = 2;
+            }else{
+                goldCoinsPerClick += 2;
+            }
+            
+            goldUpgrades["banana"] += 20;
+            goldCoinsElement.textContent = `Gold Coins: ${goldCoins}`;
+            bananaBtn.textContent = `Upgrade (${goldUpgrades["banana"]} Gold Coins)`;
+        }
+    }
+    function pineappleUpgrade(){
+        if (goldCoins >= goldUpgrades["pineapple"]) {
+            goldCoins -= goldUpgrades["pineapple"];
+            if(goldCoinsPerClick == 1){
+                goldCoinsPerClick = 10;
+            }else{
+                goldCoinsPerClick += 10;
+            }
+            
+            goldUpgrades["pineapple"] += 50;
+            goldCoinsElement.textContent = `Gold Coins: ${goldCoins}`;
+            bananaBtn.textContent = `Upgrade (${goldUpgrades["pineapple"]} Gold Coins)`;
+        }
+    }
+    function coconutUpgrade(){
+        if (goldCoins >= goldUpgrades["coconut"]) {
+            goldCoins -= goldUpgrades["coconut"];
+            if(goldCoinsPerClick == 1){
+                goldCoinsPerClick = 20;
+            }else{
+                goldCoinsPerClick += 20;
+            }
+            
+            goldUpgrades["coconut"] += 150;
+            goldCoinsElement.textContent = `Gold Coins: ${goldCoins}`;
+            bananaBtn.textContent = `Upgrade (${goldUpgrades["pineapple"]} Gold Coins)`;
+        }
+    }
+    
+
+    function kiwiUpgrade(){
+        if (coins >= upgrades["kiwi"]) {
+            coins -= upgrades["kiwi"];
+            if(coinsPerClick == 1){
+                coinsPerClick = 100;
+            }else{
+                coinsPerClick += 100;
+            }
+            
+            upgrades["kiwi"] += 250;
+            
+            coinsElement.textContent = `coins: ${coins}`;
+            kiwiBtn.textContent = `Upgrade (${upgrades["kiwi"]} coins)`;
+        }
+    }
+    function lemonUpgrade(){
+        if (coins >= upgrades["lemon"]) {
+            coins -= upgrades["lemon"];
+            if(coinsPerClick == 1){
+                coinsPerClick = 500;
+            }else{
+                coinsPerClick += 500;
+            }
+            
+            upgrades["lemon"] += 350;
+            if(upgrades["lemon"] > 6000){
+              goldDiv.style.display = "block";
+              silverDiv.style.display = "block";
+
+            }
+      
+            coinsElement.textContent = `coins: ${coins}`;
+            lemonBtn.textContent = `Upgrade (${upgrades["lemon"]} coins)`;
         }
     }
   </script>
