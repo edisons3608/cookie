@@ -286,11 +286,11 @@ function pop (e) {
     };
   }
     
-    let coins = 0;
+    let coins = 40000;
     let coinsPerClick = 1;
-    let silverCoins = 0;
+    let silverCoins = 4000;
     let silverCoinsPerClick = 1;
-    let goldCoins = 0;
+    let goldCoins = 4000;
     let goldCoinsPerClick = 1;
 
     var upgrades = {
@@ -505,7 +505,7 @@ function pop (e) {
             
             goldUpgrades["pineapple"] += 50;
             goldCoinsElement.textContent = `Gold Coins: ${goldCoins}`;
-            bananaBtn.textContent = `Upgrade (${goldUpgrades["pineapple"]} Gold Coins)`;
+            pineappleBtn.textContent = `Upgrade (${goldUpgrades["pineapple"]} Gold Coins)`;
         }
     }
     function coconutUpgrade(){
