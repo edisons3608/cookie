@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
   <title>Fruit Clicker</title>
   <style>
     body {
@@ -28,73 +29,120 @@
       pointer-events: none;
       opacity: 0;
     }
+    .button {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      padding: 15px 25px;
+      font-size: 22px;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      color: #fff;
+      background-color: #04AA6D;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 9px #999;
+    }
+
+    .button:hover {background-color: #3e8e41}
+
+    .button:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+    .tabler{
+      border:3px solid black;
+      background-color:#7abafa;
+    }
+    table {
+    border-collapse:separate;
+    border:solid black 1px;
+    border-radius:6px;
+    }
+    tr{
+      border:solid black 1px;
+    }
+    .coinLabel{
+      padding: 15px 25px;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      color: #fff;
+      background-color: #ba6a28;
+      border: none;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      border-radius: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
     
     
   </style>
 </head>
 <body>
-  <h1>Fruit Clicker</h1>
+  <h1 class="coinLabel">Fruit Clicker</h1>
   <div style="text-align:center">
-  <div style = "float: left">
+  <div style = "float: left" class="holder">
     <center><img src = "images/fruitVendor.jpg" id="clicker" height=100 width=100></img></center>
-    <center><p id="coins" >Coins: 0</p></center>
-    <center><table id="main" ></center>
+    <center><p id="coins" class="coinLabel" >Coins: 0</p></center>
+    <center><table id="main" class="tabler" ></center>
       <tr>
           <td><img src="images/apple.png" id="applePic" width = 100 height = 100></img></td>
-          <td><button id="appleBtn">Upgrade (5 Coins)</button></td>
+          <td><button class='button' id="appleBtn">Upgrade (5 Coins)</button></td>
       </tr>
       <tr>
           <td><img src="images/orange.png" id="orangePic" width = 100 height = 100></img></td>
-          <td><button id="orangeBtn">Upgrade (50 Coins)</button></td>
+          <td><button class='button' id="orangeBtn">Upgrade (50 Coins)</button></td>
       </tr>
       <tr>
           <td><img src="images/grape.png" id="grapePic" width = 100 height = 100></img></td>
-          <td><button id="grapeBtn">Upgrade (100 Coins)</button></td>
+          <td><button class='button' id="grapeBtn">Upgrade (100 Coins)</button></td>
       </tr>
       <tr style="display:none;" id="kiwiRow">
         <td><img src="images/kiwi.png" id="grapePic" width = 100 height = 100></img></td>
-        <td><button id="kiwiBtn">Upgrade (1000 Coins)</button></td>
+        <td><button class='button' id="kiwiBtn">Upgrade (1000 Coins)</button></td>
       </tr>
       <tr style="display:none;" id="lemonRow">
         <td><img src="images/lemon.png" id="grapePic" width = 100 height = 100></img></td>
-        <td><button id="lemonBtn">Upgrade (5000 Coins)</button></td>
+        <td><button class='button' id="lemonBtn">Upgrade (2000 Coins)</button></td>
       </tr>
     </table>
   </div>
   
-  <div style="float:right;display:none" id = goldDiv>
+  <div style="float:right;display:none" id = goldDiv class="holder">
     <center><img src = "images/fruitVendor.jpg" id="goldClicker" height=100 width=100></img></center>
-    <center><p id="goldCoins" >Gold Coins: 0</p></center>
-    <center><table id="goldTable" ></center>
+    <center><p id="goldCoins" class="coinLabel" >Gold Coins: 0</p></center>
+    <center><table id="goldTable" class="tabler"></center>
       <tr>
           <td><img src="images/banana.png" id="bananaPic" width = 100 height = 100></img></td>
-          <td><button id="bananaBtn">Upgrade (5 Coins)</button></td>
+          <td><button class='button' id="bananaBtn">Upgrade (5 Gold Coins)</button></td>
       </tr>
       <tr>
           <td><img src="images/pineapple.png" id="pineapplePic" width = 100 height = 100></img></td>
-          <td><button id="pineappleBtn">Upgrade (50 Coins)</button></td>
+          <td><button class='button' id="pineappleBtn">Upgrade (50 Gold Coins)</button></td>
       </tr>
       <tr>
           <td><img src="images/coconut.png" id="coconutPic" width = 100 height = 100></img></td>
-          <td><button id="coconutBtn">Upgrade (100 Coins)</button></td>
+          <td><button class='button' id="coconutBtn">Upgrade (100 Gold Coins)</button></td>
       </tr>
     </table>
   </div>
-  <div style="margin:auto;display:none" id = "silverDiv">
+  <div style="margin:auto;display:none" id = "silverDiv" class="holder">
     <center><img src = "images/fruitVendor.jpg" id="silverClicker" height=100 width=100></img></center>
-    <center><p id="silverCoins" >Silver Coins: 0</p></center>
-    <center><table id="silverTable" ></center>
+    <center><p id="silverCoins" class="coinLabel">Silver Coins: 0</p></center>
+    <center><table id="silverTable" class="tabler"></center>
       <tr>
           <td><img src="images/lime.png" id="limePic" width = 100 height = 100></img></td>
-          <td><button id="limeBtn">Upgrade (5 Coins)</button></td>
+          <td><button class='button' id="limeBtn">Upgrade (5 Silver Coins)</button></td>
       </tr>
       <tr>
           <td><img src="images/mango.png" id="mangoPic" width = 100 height = 100></img></td>
-          <td><button id="mangoBtn">Upgrade (50 Coins)</button></td>
+          <td><button class='button' id="mangoBtn">Upgrade (50 Silver Coins)</button></td>
       </tr>
       <tr>
           <td><img src="images/watermelon.png" id="watermelonPic" width = 100 height = 100></img></td>
-          <td><button id="watermelonBtn">Upgrade (100 Coins)</button></td>
+          <td><button class='button' id="watermelonBtn">Upgrade (100 Silver Coins)</button></td>
       </tr>
     </table>
   </div>
@@ -238,9 +286,9 @@ function pop (e) {
     };
   }
     
-    let coins = 40000;
+    let coins = 0;
     let coinsPerClick = 1;
-    let silverCoins = 10000;
+    let silverCoins = 0;
     let silverCoinsPerClick = 1;
     let goldCoins = 0;
     let goldCoinsPerClick = 1;
@@ -250,7 +298,7 @@ function pop (e) {
         "orange":50,
         "grape":100,
         "kiwi":1000,
-        "lemon":5000,
+        "lemon":2000,
 
 
     }
@@ -347,37 +395,37 @@ function pop (e) {
         if (coins >= upgrades["apple"]) {
             coins -= upgrades["apple"];
             if(coinsPerClick == 1){
-                coinsPerClick = 2;
+                coinsPerClick = 10;
             }else{
-                coinsPerClick += 2;
+                coinsPerClick += 10;
             }
             
             upgrades["apple"] += 20;
-            coinsElement.textContent = `coins: ${coins}`;
-            appleBtn.innerHTML = `Upgrade (${upgrades["apple"]} coins)`;
+            coinsElement.textContent = `Coins: ${coins}`;
+            appleBtn.innerHTML = `Upgrade (${upgrades["apple"]} Coins)`;
         }
     }
     function orangeUpgrade(){
         if (coins >= upgrades["orange"]) {
             coins -= upgrades["orange"];
             if(coinsPerClick == 1){
-                coinsPerClick = 10;
+                coinsPerClick = 20;
             }else{
-                coinsPerClick += 10;
+                coinsPerClick += 20;
             }
             
             upgrades["orange"] += 50;
-            coinsElement.textContent = `coins: ${coins}`;
-            orangeBtn.textContent = `Upgrade (${upgrades["orange"]} coins)`;
+            coinsElement.textContent = `Coins: ${coins}`;
+            orangeBtn.textContent = `Upgrade (${upgrades["orange"]} Coins)`;
         }
     }
     function grapeUpgrade(){
         if (coins >= upgrades["grape"]) {
             coins -= upgrades["grape"];
             if(coinsPerClick == 1){
-                coinsPerClick = 20;
+                coinsPerClick = 40;
             }else{
-                coinsPerClick += 20;
+                coinsPerClick += 40;
             }
             
             upgrades["grape"] += 150;
@@ -386,8 +434,8 @@ function pop (e) {
               lemonRow.style.display = "table-row";
               
             }
-            coinsElement.textContent = `coins: ${coins}`;
-            grapeBtn.textContent = `Upgrade (${upgrades["grape"]} coins)`;
+            coinsElement.textContent = `Coins: ${coins}`;
+            grapeBtn.textContent = `Upgrade (${upgrades["grape"]} Coins)`;
         }
     }
     function limeUpgrade(){
@@ -488,7 +536,7 @@ function pop (e) {
             upgrades["kiwi"] += 250;
             
             coinsElement.textContent = `coins: ${coins}`;
-            kiwiBtn.textContent = `Upgrade (${upgrades["kiwi"]} coins)`;
+            kiwiBtn.textContent = `Upgrade (${upgrades["kiwi"]} Coins)`;
         }
     }
     function lemonUpgrade(){
@@ -501,14 +549,14 @@ function pop (e) {
             }
             
             upgrades["lemon"] += 350;
-            if(upgrades["lemon"] > 6000){
+            if(upgrades["lemon"] > 3000){
               goldDiv.style.display = "block";
               silverDiv.style.display = "block";
 
             }
       
-            coinsElement.textContent = `coins: ${coins}`;
-            lemonBtn.textContent = `Upgrade (${upgrades["lemon"]} coins)`;
+            coinsElement.textContent = `Coins: ${coins}`;
+            lemonBtn.textContent = `Upgrade (${upgrades["lemon"]} Coins)`;
         }
     }
   </script>
